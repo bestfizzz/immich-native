@@ -4,7 +4,7 @@ set -xeuo pipefail
 
 REV=v2.3.1
 
-IMMICH_PATH=/var/lib/immich
+IMMICH_PATH=/opt/immich
 APP=$IMMICH_PATH/app
 
 if ! command -v pnpm >/dev/null 2>&1; then
