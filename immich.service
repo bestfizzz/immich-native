@@ -12,8 +12,8 @@ Type=simple
 Restart=on-failure
 UMask=0077
 
-WorkingDirectory=/var/lib/immich/app
-ExecStart=/var/lib/immich/app/start.sh
+WorkingDirectory=/opt/immich/app
+ExecStart=/opt/immich/app/start.sh
 
 SyslogIdentifier=immich
 StandardOutput=append:/var/log/immich/immich.log
