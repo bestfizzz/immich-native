@@ -6,7 +6,7 @@ This repository provides instructions and helper scripts to install [Immich](htt
 
  * This is tested on Ubuntu 24.04 (on both x86 and aarch64) as the host distro, but it will be similar on other distros. If you want to run this on a macOS, see [4v3ngR's unofficial macOS port](https://github.com/4v3ngR/immich-native-macos).
 
- * This guide installs Immich to `/var/lib/immich`. To change it, replace it to the directory you want in this README, `install.sh`, `immich.service`, `immich-machine-learning.service`.
+ * This guide installs Immich to `/opt/immich`. To change it, replace it to the directory you want in this README, `install.sh`, `immich.service`, `immich-machine-learning.service`.
 
  * The [install.sh](install.sh) script currently is using Immich v2.3.1. It should be noted that due to the fast-evolving nature of Immich, the install script may get broken if you replace the `$REV` to something more recent.
 
@@ -107,15 +107,15 @@ This provides basic permission isolation and protection.
 
 ``` bash
 sudo adduser \
-  --home /var/lib/immich/home \
+  --home /opt/immich/home \
   --shell=/sbin/nologin \
   --no-create-home \
   --disabled-password \
   --disabled-login \
   immich
-sudo mkdir -p /var/lib/immich
-sudo chown immich:immich /var/lib/immich
-sudo chmod 700 /var/lib/immich
+sudo mkdir -p /opt/immich
+sudo chown immich:immich /opt/immich
+sudo chmod 700 /opt/immich
 ```
 
 ## 3. Prepare PostgreSQL DB
@@ -140,14 +140,14 @@ postgres=# \q
 
 ## 4. Prepare `env`
 
-Save the [env](env) file to `/var/lib/immich`, and configure on your own.
+Save the [env](env) file to `/opt/immich`, and configure on your own.
 
 You'll only have to set `DB_PASSWORD`.
 
 ``` bash
-sudo cp env /var/lib/immich
-sudo chown immich:immich /var/lib/immich/env
-sudo chmod 600 /var/lib/immich/env
+sudo cp env /opt/immich
+sudo chown immich:immich /opt/immich/env
+sudo chmod 600 /opt/immich/env
 ```
 
 ## 5. Build and install Immich
@@ -160,11 +160,11 @@ In summary, the `install.sh` script does the following:
 
 #### 1. Clones and builds Immich.
 
-#### 2. Installs Immich to `/var/lib/immich` with minor patches.
+#### 2. Installs Immich to `/opt/immich` with minor patches.
 
-  * Sets up a dedicated Python venv to `/var/lib/immich/app/machine-learning/venv`.
+  * Sets up a dedicated Python venv to `/opt/immich/app/machine-learning/venv`.
 
-  * Replaces `/usr/src` to `/var/lib/immich`.
+  * Replaces `/usr/src` to `/opt/immich`.
 
   * Limits listening host from 0.0.0.0 to 127.0.0.1. If you do not want this to happen (make sure you fully understand the security risks!), change `IMMICH_HOST=127.0.0.1` to `IMMICH_HOST=0.0.0.0` from the `env` file.
 
@@ -190,7 +190,7 @@ rm /lib/systemd/system/immich*.service
 systemctl daemon-reload
 
 # Remove Immich files
-rm -rf /var/lib/immich
+rm -rf /opt/immich
 
 # Delete immich user
 deluser immich
