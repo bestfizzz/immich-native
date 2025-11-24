@@ -69,9 +69,6 @@ sudo apt install jellyfin-ffmpeg7
 
 ``` bash
 sudo apt install --no-install-recommends \
-        python3-pip \
-        python3-venv \
-        python3-dev \
         uuid-runtime \
         autoconf \
         build-essential \
@@ -101,7 +98,6 @@ sudo apt install --no-install-recommends \
         libgl1
 ```
 
-A separate Python's virtualenv will be stored to `/var/lib/immich`.
 
 ## 2. Prepare `immich` user
 
